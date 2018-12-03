@@ -11,14 +11,26 @@ type Hero struct {
  * Move hero to given direction.
  * TODO: check bounds.
  */
-func (hero *Hero) Move(direction string) {
+func (hero *Hero) Move(direction string) (int, int) {
+	X := hero.X
+	Y := hero.Y
+
 	if direction == "left" {
-		hero.X--
+		X--
 	} else if direction == "right" {
-		hero.X++
+		X++
 	} else if direction == "up" {
-		hero.Y--
+		Y--
 	} else if direction == "down" {
-		hero.Y++
+		Y++
 	}
+
+	return X, Y
+}
+
+/**
+ * Get hero position.
+ */
+func (hero Hero) GetPosition() (int, int) {
+	return hero.X, hero.Y
 }

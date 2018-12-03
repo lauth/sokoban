@@ -29,15 +29,25 @@ func run() {
 	game.Hero = fixtures.LoadHero()
 
 	for !window.Closed() {
+		heroX, heroY := game.Hero.GetPosition()
 		if window.JustPressed(pixelgl.KeyLeft) {
-			game.Hero.Move("left")
+			heroX, heroY = game.Hero.Move("left")
 		} else if window.JustPressed(pixelgl.KeyRight) {
-			game.Hero.Move("right")
+			heroX, heroY = game.Hero.Move("right")
 		} else if window.JustPressed(pixelgl.KeyUp) {
-			game.Hero.Move("up")
+			heroX, heroY = game.Hero.Move("up")
 		} else if window.JustPressed(pixelgl.KeyDown) {
-			game.Hero.Move("down")
+			heroX, heroY = game.Hero.Move("down")
 		}
+
+		if game.IsWall(heroX, heroY) {
+			// perdu
+
+		} else {
+			game.Hero.X = heroX
+			game.Hero.Y = heroY
+		}
+
 		view.Draw(window, game, blockSprites)
 		window.Update()
 	}
